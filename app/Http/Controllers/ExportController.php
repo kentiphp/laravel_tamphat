@@ -60,13 +60,16 @@ class ExportController extends Controller
             'price' => 'required'
         ]);
 
-
+        $newExportOrder = new ExportOrder([
+            'code' => $validatedData['code'],
+            'customer_code' => $validatedData['customer_code']
+        ]);
+        $newExportOrder->save();
         $exportOrder = ExportOrder::whereCode($validatedData['code'])->first();
 
         foreach ($validatedData['commodity_code'] as $key => $value) {
             //echo "$key - $value\n";
             $commodity = Commodity::whereCode($value)->first();
-            if ($commodity->warehouse - $validatedData['quantity'][$key] >= 0){
             if ($commodity) {
                 $detail = new ExportOrderDetail([
                     'commodity_code' => $commodity->code,
@@ -74,22 +77,10 @@ class ExportController extends Controller
                     'quantity' => $validatedData['quantity'][$key],
                     'price' => $validatedData['price'][$key],
                 ]);
+
                 $exportOrder->details()->save($detail);
             }
-
-            $commodityUpdate = Commodity::where('code', $value)->update([
-                /*'code' => $commodity->code,*/
-                'warehouse' => $commodity->warehouse - $validatedData['quantity'][$key]
-            ]);
-            } else{
-                return redirect(route('export.index'))->with('error','Thêm thất bại : Không đủ hàng để xuất bill');
-            }
         }
-        $newExportOrder = new ExportOrder([
-            'code' => $validatedData['code'],
-            'customer_code' => $validatedData['customer_code']
-        ]);
-        $newExportOrder->save();
 
         return redirect(route('export.index'))->with('status','Thêm Thành Công');
     }

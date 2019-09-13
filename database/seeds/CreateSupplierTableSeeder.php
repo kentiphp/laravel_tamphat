@@ -14,7 +14,7 @@ class CreateSupplierTableSeeder extends Seeder
      */
     public function run()
     {
-    for ($i=0; $i<10 ; $i++) {
+    for ($i=0; $i<100 ; $i++) {
      $item = new Supplier([
          'code' => Str::random(10),
          'name' => "Công Ty " . Str::random(5),

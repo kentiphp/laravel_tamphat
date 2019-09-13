@@ -160,13 +160,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label">Số lượng tồn</label>
-                            <div class="col-sm-9">
-                                <input class="form-control" id="warehouse" readonly>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label class="col-sm-3 control-label">Ghi Chú</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="note"  readonly>
@@ -285,7 +278,6 @@
                     $("#entry_price").attr('value', formatMoney(response.entry_price));
                     $("#price_out").attr('value', formatMoney(response.price_out));
                     $("#product_carton").attr('value', formatMoney(response.product_carton));
-                    $("#warehouse").attr('value',response.warehouse);
                     $("#note").attr('value', response.note);
                 },
                 error: function (error, xhr, throwError) {
@@ -313,9 +305,5 @@
         $(document).ready(function() {
             $('.select2').select2();
         });
-
-        function checkquantity() {
-            
-        }
     </script>
 @endsection

@@ -21,7 +21,6 @@ class CreateCommoditiesTable extends Migration
             $table->unsignedBigInteger('entry_price');
             $table->unsignedBigInteger('price_out');
             $table->unsignedBigInteger('product_carton');
-            $table->unsignedBigInteger('warehouse');
             $table->string('note')->nullable();
 
             // foreign key

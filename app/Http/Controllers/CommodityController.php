@@ -17,7 +17,6 @@ class CommodityController extends Controller
     public function index()
     {
         $commodities = Commodity::orderBy('code', 'asc')->paginate();
-
         $version = '1.2';
         $currentPage = 'Hàng Hóa';
         $pages = [
@@ -69,9 +68,10 @@ class CommodityController extends Controller
         if ($supplier) {
             $newCommodities = new Commodity($validatedData);
             $newCommodities->save();
-            return redirect(route('commodities.index'))->with('status', 'Thêm Thành Công');
-        } else {
-            return redirect(route('commodities.index'))->withErrors('supplier_code', 'Cái lòn này yêu cầu phải tồn tại');
+            return redirect(route('commodities.index'))->with('status','Thêm Thành Công');
+        }
+        else {
+            return redirect(route('commodities.index'))->withErrors('supplier_code','Cái lòn này yêu cầu phải tồn tại');
         }
     }
 
@@ -81,7 +81,7 @@ class CommodityController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show()
+    public function show( )
     {
 
     }
@@ -124,7 +124,7 @@ class CommodityController extends Controller
         $commodity->update($validatedData);
         $commodity->save();
 
-        return redirect(route('commodities.index'))->with('status', 'Chỉnh sửa thành công');
+        return redirect(route('commodities.index'))->with('status','Chỉnh sửa thành công');
     }
 
     /**

@@ -160,13 +160,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label">Hàng tồn</label>
-                            <div class="col-sm-9">
-                                <input class="form-control" id="warehouse"  readonly>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label class="col-sm-3 control-label">Ghi Chú</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="note"  readonly>
@@ -183,7 +176,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 control-label">Giá Bán/Đơn Vị</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="price" type="number" readonly />
+                                <input class="form-control" id="price" type="number" required />
                             </div>
                         </div>
 
@@ -229,7 +222,7 @@
                 '<td><input class="form-control" readonly type="text" name="commodity_code[' + count + ']" value="' + commodityCode + '" /></td>' +
                 '<td><input class="form-control" readonly type="text" name="name[' + count + ']" value="' + name + '" /></td>' +
                 '<td><input class="form-control" readonly type="text" name="quantity[' + count + ']" value="' + quantity + '" /></td>' +
-                '<td><input class="form-control" readonly type="text" name="price[' + count + ']" value="' + formatMoney(price) + " VNĐ" + '" /></td>' +
+                '<td><input class="form-control" readonly type="text" name="price[' + count + ']" value="' + price + '" /></td>' +
                 '<td><input class="form-control" readonly type="text" value="' + formatMoney(quantity * price) + " VNĐ" + '" /></td>' +
                 '</tr>';
 
@@ -286,9 +279,7 @@
                     $("#entry_price").attr('value', formatMoney(response.entry_price));
                     $("#price_out").attr('value', formatMoney(response.price_out));
                     $("#product_carton").attr('value', formatMoney(response.product_carton));
-                    $("#warehouse").attr('value', response.warehouse);
                     $("#note").attr('value', response.note);
-                    $("#price").attr('value', response.entry_price);
                 },
                 error: function (error, xhr, throwError) {
                     console.log(throwError);

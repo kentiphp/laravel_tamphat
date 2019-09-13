@@ -159,13 +159,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label">Số lượng tồn</label>
-                            <div class="col-sm-9">
-                                <input class="form-control" id="warehouse" readonly>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label class="col-sm-3 control-label">Ghi Chú</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="note"  readonly>
@@ -284,7 +277,6 @@
                     $("#entry_price").attr('value', formatMoney(response.entry_price));
                     $("#price_out").attr('value', formatMoney(response.price_out));
                     $("#product_carton").attr('value', formatMoney(response.product_carton));
-                    $("#warehouse").attr('value',response.warehouse);
                     $("#note").attr('value', response.note);
                 },
                 error: function (error, xhr, throwError) {
@@ -312,10 +304,6 @@
         $(document).ready(function() {
             $('.select2').select2();
         });
-
-        function checkquantity() {
-            
-        }
     </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.layouts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Program Files (x86)\Ampps\www\tamcute\resources\views/export/create.blade.php ENDPATH**/ ?>

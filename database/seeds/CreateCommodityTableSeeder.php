@@ -14,20 +14,19 @@ class CreateCommodityTableSeeder extends Seeder
      */
     public function run()
     {
-        $supplier=Supplier::select('code')->first();
+        $supplier = Supplier::first();
 
-        for ($i=0; $i<10 ; $i++) {
+        for ($i=0; $i<100 ; $i++) {
             $item = new Commodity([
                 'code' => Str::random(10),
                 'name' => "Bánh " . Str::random(5),
                 'specifications' => Str::random(3),
                 'unit' => 'box',
-                'entry_price' => 10000,
+                'entry_price' => mt_rand(100000, 999999999),
                 'price_out' => mt_rand(100000, 999999999),
                 'product_carton' => mt_rand(10, 150),
-                'warehouse' => 1,
                 'note' => Str::random(12),
-                'supplier_code' => $supplier->code,
+                'supplier_code' => $supplier->code
             ]);
             $item->save();
 

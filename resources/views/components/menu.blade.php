@@ -56,8 +56,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="{{ asset('img/user4-128x128.jpg') }}" class="img-circle"
-                                                 alt="User Image">
+                                            <img src="{{ asset('img/user4-128x128.jpg') }}" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Developers
@@ -69,8 +68,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="{{ asset('img/user3-128x128.jpg') }}" class="img-circle"
-                                                 alt="User Image">
+                                            <img src="{{ asset('img/user3-128x128.jpg') }}" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Sales Department
@@ -82,8 +80,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="{{ asset('img/user4-128x128.jpg') }}" class="img-circle"
-                                                 alt="User Image">
+                                            <img src="{{ asset('img/user4-128x128.jpg') }}" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Reviewers
@@ -117,8 +114,7 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <i class="fa fa-warning text-yellow"></i> Very long description here that may
-                                        not fit into the
+                                        <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
                                         page and may cause design problems
                                     </a>
                                 </li>
@@ -162,8 +158,7 @@
                                             <small class="pull-right">20%</small>
                                         </h3>
                                         <div class="progress xs">
-                                            <div class="progress-bar progress-bar-aqua" style="width: 20%"
-                                                 role="progressbar"
+                                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
                                                  aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                                 <span class="sr-only">20% Complete</span>
                                             </div>
@@ -178,8 +173,7 @@
                                             <small class="pull-right">40%</small>
                                         </h3>
                                         <div class="progress xs">
-                                            <div class="progress-bar progress-bar-green" style="width: 40%"
-                                                 role="progressbar"
+                                            <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar"
                                                  aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                                 <span class="sr-only">40% Complete</span>
                                             </div>
@@ -194,8 +188,7 @@
                                             <small class="pull-right">60%</small>
                                         </h3>
                                         <div class="progress xs">
-                                            <div class="progress-bar progress-bar-red" style="width: 60%"
-                                                 role="progressbar"
+                                            <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar"
                                                  aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                                 <span class="sr-only">60% Complete</span>
                                             </div>
@@ -210,8 +203,7 @@
                                             <small class="pull-right">80%</small>
                                         </h3>
                                         <div class="progress xs">
-                                            <div class="progress-bar progress-bar-yellow" style="width: 80%"
-                                                 role="progressbar"
+                                            <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar"
                                                  aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
                                                 <span class="sr-only">80% Complete</span>
                                             </div>
@@ -235,30 +227,30 @@
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
-                        <li class="user-header">
-                            <img src="{{asset('img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                    <li class="user-header">
+                        <img src="{{asset('img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
 
-                            <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
-                            </p>
-                        </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="row">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
-                                </div>
+                        <p>
+                            Alexander Pierce - Web Developer
+                            <small>Member since Nov. 2012</small>
+                        </p>
+                    </li>
+                    <!-- Menu Body -->
+                    <li class="user-body">
+                        <div class="row">
+                            <div class="col-xs-4 text-center">
+                                <a href="#">Followers</a>
                             </div>
-                            <!-- /.row -->
-                        </li>
-                        <!-- Menu Footer-->
+                            <div class="col-xs-4 text-center">
+                                <a href="#">Sales</a>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <a href="#">Friends</a>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </li>
+                    <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
@@ -312,7 +304,9 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
+
                 <ul class="treeview-menu">
+
                     <li class="active">
                         <a href="{{route('suppliers.index')}}">
                             <i class="fa fa-circle-o"></i>
@@ -330,26 +324,66 @@
                             <i class="fa fa-circle-o"></i>
                             Danh sách khách hàng
                         </a></li>
+
+                    <li class="active">
+                        <a href="{{route('import.index')}}">
+                            <i class="fa fa-circle-o"></i>
+                            Danh sách nhập hàng
+                        </a></li>
+
+                    <li class="active">
+                        <a href="{{route('export.index')}}">
+                            <i class="fa fa-circle-o"></i>
+                            Danh sách xuất hàng
+                        </a></li>
                 </ul>
+
             </li>
 
-            <li>
-                <a href="{{route('export.index')}}">
-                    <i class="fa fa-th"></i> <span>Xuất hàng</span>
+            <li class="active treeview">
+
+                <a href="#">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Selling</span>
                     <span class="pull-right-container">
-              <small class="label pull-right bg-red">2019</small>
-            </span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
+
+                <ul class="treeview-menu">
+{{--                    <li class="active">--}}
+{{--                        <a href="{{route('bills.index')}}">--}}
+{{--                            <i class="fa fa-circle-o"></i>--}}
+{{--                                Danh sách bán hàng trong ngày--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+                </ul>
+
             </li>
 
-            <li>
-                <a href="{{route('warehouse.index')}}">
-                    <i class="fa fa-th"></i> <span>Tồn kho</span>
+            <li class="active treeview">
+
+                <a href="#">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Kho</span>
                     <span class="pull-right-container">
-              <small class="label pull-right bg-red">2019</small>
-            </span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
+
+                <ul class="treeview-menu">
+{{--                    <li class="active">--}}
+{{--                        <a href="{{route('warehouses.index')}}">--}}
+{{--                            <i class="fa fa-circle-o"></i>--}}
+{{--                                Tồn kho--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+                </ul>
+
             </li>
+
+
+
 
         </ul>
     </section>
