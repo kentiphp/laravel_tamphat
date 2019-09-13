@@ -22,6 +22,7 @@
                                 <th>Số Lượng</th>
                                 <th>Đơn Giá</th>
                                 <th>Thành Tiền</th>
+                                <th>Chỉnh sửa/Xóa</th>
                             </tr>
 
                             </thead>
@@ -34,6 +35,7 @@
                                     <td>{{ $detail->quantity }}</td>
                                     <td>{{ \App\Services\MyHelper::moneyFormating($detail->price) }}</td>
                                     <td>{{ \App\Services\MyHelper::moneyFormating($detail->getAmount()) }}</td>
+
                                 </tr>
                             @endforeach
                             </tbody>

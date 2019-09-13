@@ -25,6 +25,7 @@ class CreateCommodityTableSeeder extends Seeder
                 'entry_price' => mt_rand(100000, 999999999),
                 'price_out' => mt_rand(100000, 999999999),
                 'product_carton' => mt_rand(10, 150),
+                'warehouse' => mt_rand(10, 30),
                 'note' => Str::random(12),
                 'supplier_code' => $supplier->code
             ]);

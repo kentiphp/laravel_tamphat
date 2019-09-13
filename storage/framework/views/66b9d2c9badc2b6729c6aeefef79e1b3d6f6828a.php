@@ -1,10 +1,8 @@
-@extends('layouts.layouts')
-
-@section('style')
+<?php $__env->startSection('style'); ?>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')s
+<?php $__env->startSection('content'); ?>s
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
@@ -13,14 +11,15 @@
                 <!-- /.box-header -->
                 <!-- form start -->
 
-                @if (session('status'))
+                <?php if(session('status')): ?>
                     <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
+                        <?php echo e(session('status')); ?>
 
-                <form action="{{ route('export.store') }}" method="POST" class="form-horizontal" id="createMainForm">
-                    @csrf
+                    </div>
+                <?php endif; ?>
+
+                <form action="<?php echo e(route('export.store')); ?>" method="POST" class="form-horizontal" id="createMainForm">
+                    <?php echo csrf_field(); ?>
                     <div class="box-body">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Mã Hóa Đơn</label>
@@ -35,11 +34,12 @@
                                 <select onchange="getCustomer(this.value)" class="select2" id="customer_code"
                                         name="customer_code" style="width: 100%;">
                                     <option>~~~~ Chọn Nhà Phân Phối ~~~~</option>
-                                    @foreach($customers as $customer)
-                                        <option value="{{ $customer->code }}">{{ $customer->name }}
-                                            - {{ $customer->orders_count }} đơn hàng
+                                    <?php $__currentLoopData = $customers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $customer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($customer->code); ?>"><?php echo e($customer->name); ?>
+
+                                            - <?php echo e($customer->orders_count); ?> đơn hàng
                                         </option>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button value="{{ __('import.submit') }}" type="submit" class="btn btn-info pull-right">Thêm
+                        <button value="<?php echo e(__('import.submit')); ?>" type="submit" class="btn btn-info pull-right">Thêm
                             mới
                         </button>
                     </div>
@@ -193,7 +193,7 @@
                     <!-- /.box-body -->
 
                     <div class="box-footer">
-                        <button value="{{ __('import.submit') }}" type="submit" class="btn btn-info pull-right">Thêm
+                        <button value="<?php echo e(__('import.submit')); ?>" type="submit" class="btn btn-info pull-right">Thêm
                             mới
                         </button>
                     </div>
@@ -205,9 +205,9 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('script')
+<?php $__env->startSection('script'); ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
     <script>
         let total = 0;
@@ -243,7 +243,7 @@
         function getCustomer(code) {
             $("#whereToAppend").html("");
             total = 0;
-            const url = "{{ url('api/v1/customer') }}/" + code;
+            const url = "<?php echo e(url('api/v1/customer')); ?>/" + code;
             $.ajax({
                 url: url,
                 cache: false,
@@ -257,7 +257,7 @@
         }
 
         function getCommodities() {
-            const url = "{{ url('api/v1/commodities') }}";
+            const url = "<?php echo e(url('api/v1/commodities')); ?>";
             // console.log(url);
             $.ajax({
                 url: url,
@@ -277,7 +277,7 @@
         }
 
         function getCommodity(code) {
-            let url = "{{ url('api/v1/commodity') }}/" + code;
+            let url = "<?php echo e(url('api/v1/commodity')); ?>/" + code;
             $.ajax({
                 url: url,
                 cache: false,
@@ -316,4 +316,5 @@
             $('.select2').select2();
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.layouts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Program Files (x86)\Ampps\www\laravel_tamphat\resources\views/export/create.blade.php ENDPATH**/ ?>

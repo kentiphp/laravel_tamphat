@@ -8,6 +8,7 @@ use App\ImportOrderDetail;
 use App\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class ImportController extends Controller
 {
@@ -53,7 +54,8 @@ class ImportController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validatedData = $request->validate([
             'code' => 'required|unique:import_orders|max:25',
             'supplier_code' => 'required|exists:suppliers,code|max:25',
@@ -79,19 +81,22 @@ class ImportController extends Controller
                     'quantity' => $validatedData['quantity'][$key],
                     'price' => $validatedData['price'][$key],
                 ]);
-
                 $importOrder->details()->save($detail);
             }
+            $commodityUpdate = Commodity::where('code', $value)->update([
+                /*'code' => $commodity->code,*/
+                'warehouse' => $commodity->warehouse + $validatedData['quantity'][$key]
+            ]);
+
         }
 
-        //dd($newImportOrder);
-        return redirect(route('import.index'))->with('status','Thêm Thành Công');
+        return redirect(route('import.index'))->with('status', 'Thêm Thành Công');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  string  $code
+     * @param string $code
      * @return Response
      */
     public function show($code)
@@ -111,17 +116,18 @@ class ImportController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string  $code
+     * @param string $code
      * @return Response
      */
-    public function destroy($code) {
+    public function destroy($code)
+    {
         $import = ImportOrder::whereCode($code)->firstOrFail();
 
         if ($import->trashed() == false) {
             $import->delete();
-            return redirect(route('import.index'))->with('status','Xóa Thành Công');
+            return redirect(route('import.index'))->with('status', 'Xóa Thành Công');
 
         }
-        return redirect(route('import.index'))->with('error','Xóa Thất Bại');
+        return redirect(route('import.index'))->with('error', 'Xóa Thất Bại');
     }
 }

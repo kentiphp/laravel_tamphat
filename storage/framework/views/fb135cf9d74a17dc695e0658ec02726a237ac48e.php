@@ -1,10 +1,8 @@
-@extends('layouts.layouts')
-
-@section('style')
+<?php $__env->startSection('style'); ?>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')s
+<?php $__env->startSection('content'); ?>s
 <section class="content">
     <div class="row">
         <div class="col-xs-12">
@@ -13,14 +11,15 @@
                 <!-- /.box-header -->
                 <!-- form start -->
 
-                @if (session('status'))
+                <?php if(session('status')): ?>
                     <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
+                        <?php echo e(session('status')); ?>
 
-                <form action="{{ route('export.store') }}" method="POST" class="form-horizontal" id="createMainForm">
-                    @csrf
+                    </div>
+                <?php endif; ?>
+
+                <form action="<?php echo e(route('import.store')); ?>" method="POST" class="form-horizontal" id="createMainForm">
+                    <?php echo csrf_field(); ?>
                     <div class="box-body">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Mã Hóa Đơn</label>
@@ -32,14 +31,15 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Nhà Phân Phối</label>
                             <div class="col-sm-10">
-                                <select onchange="getCustomer(this.value)" class="select2" id="customer_code"
-                                        name="customer_code" style="width: 100%;">
+                                <select onchange="getSupplier(this.value)" class="select2" id="supplier_code"
+                                        name="supplier_code" style="width: 100%;">
                                     <option>~~~~ Chọn Nhà Phân Phối ~~~~</option>
-                                    @foreach($customers as $customer)
-                                        <option value="{{ $customer->code }}">{{ $customer->name }}
-                                            - {{ $customer->orders_count }} đơn hàng
+                                    <?php $__currentLoopData = $suppliers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $supplier): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($supplier->code); ?>"><?php echo e($supplier->name); ?>
+
+                                            - <?php echo e($supplier->commodities_count); ?> sản phẩm
                                         </option>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Tên Nhà Phân Phối</label>
                             <div class="col-sm-10">
-                                <input type="text" id="customer_name" class="form-control" readonly>
+                                <input type="text" id="supplier_name" class="form-control" readonly>
                             </div>
                         </div>
 
@@ -80,7 +80,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <button type="button" onclick="getCommodities($('#customer_code').val())"
+                                <button type="button" onclick="getCommodities($('#supplier_code').val())"
                                         class="btn bg-purple" data-toggle="modal" data-target="#addCommodity">+
                                 </button>
                             </div>
@@ -89,7 +89,8 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button value="{{ __('import.submit') }}" type="submit" class="btn btn-info pull-right">Thêm
+                        <i style="color: green"> Vui lòng điền đầy đủ các mục trên ngoại trừ mục note </i>
+                        <button value="<?php echo e(__('import.submit')); ?>" type="submit" class="btn btn-info pull-right">Thêm
                             mới
                         </button>
                     </div>
@@ -146,6 +147,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-sm-3 control-label">Giá nhập <span
+                                        class="text-danger">(VNĐ)</span></label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="entry_price" readonly>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-sm-3 control-label">Giá đề xuất bán <span class="text-danger">(VNĐ)</span></label>
@@ -155,7 +163,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label">Sản Phẩm/Thùng</label>
+                            <label class="col-sm-3 control-label">Sản phẩm / Thùng</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="product_carton" readonly>
                             </div>
@@ -179,13 +187,13 @@
                             <label class="col-sm-3 control-label">Số Lượng</label>
                             <div class="col-sm-9">
                                 <input class="form-control" id="quantity" type="number" required/>
-                            </div>
+                        </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label">Giá Bán/Đơn Vị</label>
+                            <label class="col-sm-3 control-label">Giá Nhập</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="price" type="number" required/>
+                                <input class="form-control" id="price" type="number" readonly/>
                             </div>
                         </div>
 
@@ -193,7 +201,7 @@
                     <!-- /.box-body -->
 
                     <div class="box-footer">
-                        <button value="{{ __('import.submit') }}" type="submit" class="btn btn-info pull-right">Thêm
+                        <button value="<?php echo e(__('import.submit')); ?>" type="submit" class="btn btn-info pull-right">Thêm
                             mới
                         </button>
                     </div>
@@ -205,9 +213,9 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('script')
+<?php $__env->startSection('script'); ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
     <script>
         let total = 0;
@@ -236,19 +244,21 @@
                 '<td><input class="form-control" readonly type="text" name="price[' + count + ']" value="' + price + '" /></td>' +
                 '<td><input class="form-control" readonly type="text" value="' + formatMoney(quantity * price) + " VNĐ" + '" /></td>' +
                 '</tr>';
+
             count++;
             return html;
         }
 
-        function getCustomer(code) {
+        function getSupplier(code) {
             $("#whereToAppend").html("");
             total = 0;
-            const url = "{{ url('api/v1/customer') }}/" + code;
+            const url = "<?php echo e(url('api/v1/supplier')); ?>/" + code;
             $.ajax({
                 url: url,
                 cache: false,
                 success: function (response) {
-                    $("#customer_name").attr('value', response.name);
+                    // $("#supplier_code").attr('value', response.code);
+                    $("#supplier_name").attr('value', response.name);
                 },
                 error: function (error, xhr, throwError) {
                     console.log(throwError);
@@ -256,8 +266,8 @@
             });
         }
 
-        function getCommodities() {
-            const url = "{{ url('api/v1/commodities') }}";
+        function getCommodities(supplierCode) {
+            const url = "<?php echo e(url('api/v1/supplier')); ?>/" + supplierCode + "/commodities";
             // console.log(url);
             $.ajax({
                 url: url,
@@ -277,7 +287,7 @@
         }
 
         function getCommodity(code) {
-            let url = "{{ url('api/v1/commodity') }}/" + code;
+            let url = "<?php echo e(url('api/v1/commodity')); ?>/" + code;
             $.ajax({
                 url: url,
                 cache: false,
@@ -285,10 +295,12 @@
                     $("#name").attr('value', response.name);
                     $("#specifications").attr('value', response.specifications);
                     $("#commodity_unit").attr('value', response.unit);
+                    $("#entry_price").attr('value', formatMoney(response.entry_price));
                     $("#price_out").attr('value', formatMoney(response.price_out));
-                    $("#product_carton").attr('value', formatMoney(response.product_carton));
+                    $("#product_carton").attr('value', response.product_carton);
                     $("#warehouse").attr('value', formatMoney(response.warehouse));
                     $("#note").attr('value', response.note);
+                    $("#price").attr('value', response.entry_price);
                 },
                 error: function (error, xhr, throwError) {
                     console.log(throwError);
@@ -316,4 +328,5 @@
             $('.select2').select2();
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.layouts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Program Files (x86)\Ampps\www\laravel_tamphat\resources\views/import/create.blade.php ENDPATH**/ ?>

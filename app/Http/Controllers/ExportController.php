@@ -19,6 +19,11 @@ class ExportController extends Controller
     public function index()
     {
         $orders = ExportOrder::orderBy('created_at', 'desc')->withCount('details')->paginate();
+        foreach ($orders as $order){
+            if ($order->details_count ==0){
+                $data = ExportOrder::where('code',$order->code)->forceDelete();
+            }
+        }
         // dd($orders->first());
         $version = '1.2';
         $currentPage = 'Xuất Hàng';
@@ -51,7 +56,8 @@ class ExportController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $validatedData = $request->validate([
             'code' => 'required|unique:export_orders|max:25',
             'customer_code' => 'required|exists:customers,code|max:25',
@@ -66,29 +72,39 @@ class ExportController extends Controller
         ]);
         $newExportOrder->save();
         $exportOrder = ExportOrder::whereCode($validatedData['code'])->first();
-
         foreach ($validatedData['commodity_code'] as $key => $value) {
             //echo "$key - $value\n";
             $commodity = Commodity::whereCode($value)->first();
-            if ($commodity) {
-                $detail = new ExportOrderDetail([
-                    'commodity_code' => $commodity->code,
-                    'unit' => $commodity->unit,
-                    'quantity' => $validatedData['quantity'][$key],
-                    'price' => $validatedData['price'][$key],
-                ]);
+            if ($commodity->warehouse - $validatedData['quantity'][$key] >= 0) {
+                if ($commodity) {
+                    $detail = new ExportOrderDetail([
+                        'commodity_code' => $commodity->code,
+                        'unit' => $commodity->unit,
+                        'quantity' => $validatedData['quantity'][$key],
+                        'price' => $validatedData['price'][$key],
+                    ]);
+                    $exportOrder->details()->save($detail);
+                }
 
-                $exportOrder->details()->save($detail);
+                $commodityUpdate = Commodity::where('code', $value)->update([
+                    /*'code' => $commodity->code,*/
+                    'warehouse' => $commodity->warehouse - $validatedData['quantity'][$key]
+                ]);
+            } else {
+                $exportOrder = ExportOrder::where('code',$validatedData['code'])->forceDelete();
+                return redirect(route('export.index'))->with('error', 'Thêm thất bại : Không đủ hàng để xuất bill');
             }
         }
 
-        return redirect(route('export.index'))->with('status','Thêm Thành Công');
+
+        return redirect(route('export.index'))->with('status', 'Thêm Thành Công');
     }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  string  $code
+     * @param string $code
      * @return Response
      */
     public function show($code)
@@ -108,17 +124,30 @@ class ExportController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string  $code
+     * @param string $code
      * @return Response
      */
-    public function destroy($code) {
+    public function destroy($code)
+    {
         $export = ExportOrder::whereCode($code)->firstOrFail();
 
         if ($export->trashed() == false) {
             $export->delete();
-            return redirect(route('export.index'))->with('status','Xóa Thành Công');
+            return redirect(route('export.index'))->with('status', 'Xóa Thành Công');
 
         }
-        return redirect(route('export.index'))->with('error','Xóa Thất Bại');
+        return redirect(route('export.index'))->with('error', 'Xóa Thất Bại');
+    }
+
+    public function destroyDetails($code)
+    {
+        $export = ExportOrderDetail::whereCode($code)->firstOrFail();
+
+        if ($export->trashed() == false) {
+            $export->delete();
+            return redirect(route('export.index'))->with('status', 'Xóa Thành Công');
+
+        }
+        return redirect(route('export.index'))->with('error', 'Xóa Thất Bại');
     }
 }

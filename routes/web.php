@@ -23,3 +23,5 @@ Route::resources([ 'commodities' => 'CommodityController' ]);
 Route::resources([ 'customers' => 'CustomerController' ]);
 Route::resources([ 'import' => 'ImportController' ]);
 Route::resources([ 'export' => 'ExportController' ]);
+Route::resources([ 'warehouse' => 'WarehouseController' ]);
+Route::resources([ 'salesreport' => 'SalesReportController' ]);

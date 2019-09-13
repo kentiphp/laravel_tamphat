@@ -1,7 +1,7 @@
 @extends('layouts.layouts')
 
 @section('style')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
 @endsection
 
 @section('content')s
@@ -25,17 +25,20 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Mã Hóa Đơn</label>
                             <div class="col-sm-10">
-                                <input type="text" id="code" name="code" class="form-control" required />
+                                <input type="text" id="code" name="code" class="form-control" required/>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Nhà Phân Phối</label>
                             <div class="col-sm-10">
-                                <select onchange="getSupplier(this.value)" class="select2" id="supplier_code" name="supplier_code" style="width: 100%;">
+                                <select onchange="getSupplier(this.value)" class="select2" id="supplier_code"
+                                        name="supplier_code" style="width: 100%;">
                                     <option>~~~~ Chọn Nhà Phân Phối ~~~~</option>
                                     @foreach($suppliers as $supplier)
-                                        <option value="{{ $supplier->code }}">{{ $supplier->name }} - {{ $supplier->commodities_count }} sản phẩm</option>
+                                        <option value="{{ $supplier->code }}">{{ $supplier->name }}
+                                            - {{ $supplier->commodities_count }} sản phẩm
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -53,13 +56,13 @@
                             <div class="col-sm-10">
                                 <table class="table table-bordered table-striped">
                                     <thead>
-                                        <tr>
-                                            <th>Mã Sản Phẩm</th>
-                                            <th>Tên Sản Phẩm</th>
-                                            <th>Số Lượng</th>
-                                            <th>Đơn Giá</th>
-                                            <th>Thành Tiền</th>
-                                        </tr>
+                                    <tr>
+                                        <th>Mã Sản Phẩm</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Số Lượng</th>
+                                        <th>Đơn Giá</th>
+                                        <th>Thành Tiền</th>
+                                    </tr>
                                     </thead>
                                     <tbody id="whereToAppend">
                                     </tbody>
@@ -70,13 +73,16 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Tổng Cộng</label>
                             <div class="col-sm-10">
-                                <input type="text" id="total" value="0 VNĐ" class="form-control" readonly style="text-align:right;">
+                                <input type="text" id="total" value="0 VNĐ" class="form-control" readonly
+                                       style="text-align:right;">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <button type="button" onclick="getCommodities($('#supplier_code').val())" class="btn bg-purple" data-toggle="modal" data-target="#addCommodity">+</button>
+                                <button type="button" onclick="getCommodities($('#supplier_code').val())"
+                                        class="btn bg-purple" data-toggle="modal" data-target="#addCommodity">+
+                                </button>
                             </div>
                         </div>
 
@@ -84,7 +90,9 @@
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <i style="color: green"> Vui lòng điền đầy đủ các mục trên ngoại trừ mục note </i>
-                        <button value="{{ __('import.submit') }}" type="submit" class="btn btn-info pull-right">Thêm mới</button>
+                        <button value="{{ __('import.submit') }}" type="submit" class="btn btn-info pull-right">Thêm
+                            mới
+                        </button>
                     </div>
                     <!-- /.box-footer -->
                 </form>
@@ -113,70 +121,79 @@
                         <div class="form-group row">
                             <label class="col-sm-3 control-label">Sản Phẩm</label>
                             <div class="col-sm-9">
-                                <select onchange="getCommodity(this.value)" class="form-control select2" id="commodity_code" required></select>
+                                <select onchange="getCommodity(this.value)" class="form-control select2"
+                                        id="commodity_code" required></select>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-3 control-label">Tên Sản Phẩm</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="name"  readonly>
+                                <input class="form-control" id="name" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label">Specifications</label>
+                            <label class="col-sm-3 control-label">Quy cách đóng gói</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="specifications"  readonly>
+                                <input class="form-control" id="specifications" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-3 control-label">Đơn Vị Tính</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="commodity_unit"  readonly>
+                                <input class="form-control" id="commodity_unit" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label">Entry Price <span class="text-danger">(VNĐ)</span></label>
+                            <label class="col-sm-3 control-label">Giá nhập <span
+                                        class="text-danger">(VNĐ)</span></label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="entry_price"  readonly>
+                                <input class="form-control" id="entry_price" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label">Price Out <span class="text-danger">(VNĐ)</span></label>
+                            <label class="col-sm-3 control-label">Giá đề xuất bán <span class="text-danger">(VNĐ)</span></label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="price_out"  readonly>
+                                <input class="form-control" id="price_out" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label">Product / Carton</label>
+                            <label class="col-sm-3 control-label">Sản phẩm / Thùng</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="product_carton"  readonly>
+                                <input class="form-control" id="product_carton" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 control-label">Tồn kho</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="warehouse" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-3 control-label">Ghi Chú</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="note"  readonly>
+                                <input class="form-control" id="note" readonly>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-3 control-label">Số Lượng</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="quantity" type="number" required />
-                            </div>
+                                <input class="form-control" id="quantity" type="number" required/>
+                        </div>
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-sm-3 control-label">Giá Bán/Đơn Vị</label>
+                            <label class="col-sm-3 control-label">Giá Nhập</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="price" type="number" required />
+                                <input class="form-control" id="price" type="number" readonly/>
                             </div>
                         </div>
 
@@ -184,8 +201,9 @@
                     <!-- /.box-body -->
 
                     <div class="box-footer">
-                        <i style="color: green"> Vui lòng điền đầy đủ các mục trên ngoại trừ mục note </i>
-                        <button value="{{ __('import.submit') }}" type="submit" class="btn btn-info pull-right">Thêm mới</button>
+                        <button value="{{ __('import.submit') }}" type="submit" class="btn btn-info pull-right">Thêm
+                            mới
+                        </button>
                     </div>
                     <!-- /.box-footer -->
                 </form>
@@ -201,7 +219,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
     <script>
         let total = 0;
-        $("#addProductForm").submit(function(event) {
+        $("#addProductForm").submit(function (event) {
             // console.log(buildHTML());
             $("#whereToAppend").append(buildHTML());
             $("#total").val(formatMoney(total) + " VNĐ");
@@ -211,6 +229,7 @@
         });
 
         let count = 0;
+
         function buildHTML() {
             let commodityCode = $("#commodity_code").val();
             let name = $("#name").val();
@@ -237,7 +256,7 @@
             $.ajax({
                 url: url,
                 cache: false,
-                success: function(response){
+                success: function (response) {
                     // $("#supplier_code").attr('value', response.code);
                     $("#supplier_name").attr('value', response.name);
                 },
@@ -253,10 +272,10 @@
             $.ajax({
                 url: url,
                 cache: false,
-                success: function(response){
+                success: function (response) {
                     //
                     let html = '<option>~~~~ Chọn Mặt Hàng ~~~~</option>';
-                    for(let i = 0; i < response.length; i++){
+                    for (let i = 0; i < response.length; i++) {
                         html += "<option value='" + response[i].code + "'>" + response[i].name + "</option>";
                     }
                     $("#commodity_code").html(html);
@@ -272,14 +291,16 @@
             $.ajax({
                 url: url,
                 cache: false,
-                success: function(response){
+                success: function (response) {
                     $("#name").attr('value', response.name);
                     $("#specifications").attr('value', response.specifications);
                     $("#commodity_unit").attr('value', response.unit);
                     $("#entry_price").attr('value', formatMoney(response.entry_price));
                     $("#price_out").attr('value', formatMoney(response.price_out));
-                    $("#product_carton").attr('value', formatMoney(response.product_carton));
+                    $("#product_carton").attr('value', response.product_carton);
+                    $("#warehouse").attr('value', formatMoney(response.warehouse));
                     $("#note").attr('value', response.note);
+                    $("#price").attr('value', response.entry_price);
                 },
                 error: function (error, xhr, throwError) {
                     console.log(throwError);
@@ -303,7 +324,7 @@
             }
         };
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.select2').select2();
         });
     </script>

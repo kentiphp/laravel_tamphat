@@ -1,4 +1,3 @@
-
 <!-- jQuery 3 -->
 <script src="{{ asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -32,11 +31,12 @@
 <script src="{{ asset('bower_components/fastclick/lib/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('js/adminlte.min.js')}}"></script>
-{{--<!-- AdminLTE dashboard demo (This is only for demo purposes) -->--}}
+<!-- DataTables -->
 {{--<script src="{{ asset('js/pages/dashboard.js')}}"></script>--}}
 <!-- AdminLTE for demo purposes -->
-{{--<script src="{{ asset('js/demo.js')}}"></script>--}}
+<script src="{{ asset('js/demo.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
 <script>
     @if (session('status'))
     Swal.fire({
@@ -54,5 +54,8 @@
         confirmButtonText: 'OK!'
     })
     @endif
+
+
+    })
 
 </script>

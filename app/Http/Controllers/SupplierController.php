@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Supplier;
 use Illuminate\Http\Request;
 use Exception;
-use Illuminate\Http\Response;
+
 
 class SupplierController extends Controller
 {
