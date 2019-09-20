@@ -94,8 +94,17 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Menu</li>
-            <li class="active treeview">
 
+            <li class="active">
+                <a href="{{ route('dashboard.index') }}">
+                    <i class="fa fa-th"></i> <span>Dashboard</span>
+                    <span class="pull-right-container">
+              <small class="label pull-right bg-red">2019</small>
+            </span>
+                </a>
+            </li>
+
+            <li class="active treeview">
                 <a href="#">
                     <i class="fa fa-database"></i> <span>Data Tâm Phát</span>
                     <span class="pull-right-container">
@@ -144,6 +153,13 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    <li class="active">
+                        <a href="{{route('import.create')}}">
+                            <i class="fa fa-circle-o"></i>
+                            Nhập hàng
+                        </a>
+                    </li>
+
                     <li class="active">
                         <a href="{{route('warehouse.index')}}">
                             <i class="fa fa-circle-o"></i>
