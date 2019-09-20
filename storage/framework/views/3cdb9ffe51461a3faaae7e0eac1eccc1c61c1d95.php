@@ -11,7 +11,6 @@
         <!-- Sidebar toggle button-->
 
 
-
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
@@ -22,34 +21,34 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="<?php echo e(asset('img/user2-160x160.jpg')); ?>" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <span class="hidden-xs">Admin</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
-                    <li class="user-header">
-                        <img src="<?php echo e(asset('img/user2-160x160.jpg')); ?>" class="img-circle" alt="User Image">
+                        <li class="user-header">
+                            <img src="<?php echo e(asset('img/user2-160x160.jpg')); ?>" class="img-circle" alt="User Image">
 
-                        <p>
-                            Alexander Pierce - Web Developer
-                            <small>Member since Nov. 2012</small>
-                        </p>
-                    </li>
-                    <!-- Menu Body -->
-                    <li class="user-body">
-                        <div class="row">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
+                            <p>
+                                Alexander Pierce - Web Developer
+                                <small>Member since Nov. 2012</small>
+                            </p>
+                        </li>
+                        <!-- Menu Body -->
+                        <li class="user-body">
+                            <div class="row">
+                                <div class="col-xs-4 text-center">
+                                    <a href="#">Followers</a>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                    <a href="#">Sales</a>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                    <a href="#">Friends</a>
+                                </div>
                             </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Sales</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Friends</a>
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </li>
-                    <!-- Menu Footer-->
+                            <!-- /.row -->
+                        </li>
+                        <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
@@ -82,8 +81,8 @@
             </div>
         </div>
         <!-- search form -->
-       
-        <!-- /.search form -->
+    
+    <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">Menu</li>
@@ -115,45 +114,20 @@
                             <i class="fa fa-circle-o"></i>
                             Danh sách khách hàng
                         </a></li>
-
-                    <li class="active">
-                        <a href="<?php echo e(route('import.index')); ?>">
-                            <i class="fa fa-circle-o"></i>
-                            Danh sách nhập hàng
-                        </a></li>
-
-                    <li class="active">
-                        <a href="<?php echo e(route('export.index')); ?>">
-                            <i class="fa fa-circle-o"></i>
-                            Danh sách xuất hàng
-                        </a></li>
                 </ul>
 
             </li>
 
-            <li class="active treeview">
-
-                <a href="#">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Selling</span>
+            <li class="active">
+                <a href="<?php echo e(route('export.create')); ?>">
+                    <i class="fa fa-th"></i> <span>Bán hàng</span>
                     <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
+              <small class="label pull-right bg-red">2019</small>
+            </span>
                 </a>
-
-                <ul class="treeview-menu">
-
-
-
-
-
-
-                </ul>
-
             </li>
 
             <li class="active treeview">
-
                 <a href="#">
                     <i class="fa fa-dashboard"></i>
                     <span>Kho</span>
@@ -161,19 +135,35 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
-
                 <ul class="treeview-menu">
-
-
-
-
-
-
+                    <li class="active">
+                        <a href="<?php echo e(route('warehouse.index')); ?>">
+                            <i class="fa fa-circle-o"></i>
+                            Tồn kho
+                        </a>
+                    </li>
                 </ul>
+
 
             </li>
 
-
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i>
+                    <span>Báo cáo</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active">
+                        <a href="<?php echo e(route('salesreport.index')); ?>">
+                            <i class="fa fa-circle-o"></i>
+                            Doanh thu
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
 
         </ul>

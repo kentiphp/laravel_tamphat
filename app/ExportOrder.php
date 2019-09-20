@@ -15,7 +15,7 @@ class ExportOrder extends Model
      * @var array
      */
     protected $fillable = [
-        'code', 'customer_code',
+        'code', 'customer_code','created_at'
     ];
 
     /**

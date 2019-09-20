@@ -14,7 +14,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect(route('suppliers.index'));
+    return redirect(route('dashboard.index'));
 });
 Route::get('home', 'HomeController@index')->name('home');
 
@@ -25,3 +25,4 @@ Route::resources([ 'import' => 'ImportController' ]);
 Route::resources([ 'export' => 'ExportController' ]);
 Route::resources([ 'warehouse' => 'WarehouseController' ]);
 Route::resources([ 'salesreport' => 'SalesReportController' ]);
+Route::resources([ 'dashboard' => 'DashboardController' ]);

@@ -122,7 +122,7 @@
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <i style="color: green"> Vui lòng điền đầy đủ các mục trên ngoại trừ mục note </i>
-                        <button value="{{ __('bills.submit') }}" type="submit" class="btn btn-info pull-right">UPDATE</button>
+                        <button value="{{ __('import.submit') }}" type="submit" class="btn btn-info pull-right">UPDATE</button>
                     </div>
                     <!-- /.box-footer -->
 

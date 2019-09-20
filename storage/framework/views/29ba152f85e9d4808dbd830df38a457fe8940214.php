@@ -12,7 +12,10 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <a href="<?php echo e(route('import.create')); ?>"><button class="btn bg-purple margin">Thêm Mới</button></a>
+
+                        <a href="<?php echo e(route('import.create')); ?>">
+                            <button class="btn bg-purple margin">Thêm Mới</button>
+                        </a>
 
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
@@ -35,7 +38,9 @@
                                     <td><?php echo e($order->created_at->diffForHumans()); ?></td>
 
                                     <td>
-                                        <a href="<?php echo e(route('import.show', $order->code)); ?>"><button class="btn btn-block btn-info btn-xs">Chi Tiết</button></a>
+                                        <a href="<?php echo e(route('import.show', $order->code)); ?>">
+                                            <button class="btn btn-block btn-info btn-xs">Chi Tiết</button>
+                                        </a>
                                         
                                         <form action="<?php echo e(route('import.destroy', $order->code)); ?>" method="POST">
                                             <?php echo csrf_field(); ?>
