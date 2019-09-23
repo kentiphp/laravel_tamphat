@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Expense;
 use App\ExportOrder;
 use App\ImportOrder;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 
 class SalesReportController extends Controller
 {
@@ -18,23 +17,28 @@ class SalesReportController extends Controller
     public function index()
     {
 
-        $orders = ImportOrder::orderBy('created_at', 'desc')->withCount('details')->paginate();
-        $order1s = ExportOrder::orderBy('created_at', 'desc')->withCount('details')->paginate();
-        $getTotalImport = 0;
+        $orders = ImportOrder::orderBy('created_at', 'asc')->withCount('details')->paginate();
+        $order1s = ExportOrder::orderBy('created_at', 'asc')->withCount('details')->paginate();
+        $expenses = Expense::orderBy('id','asc')->paginate();
+
+        $getTotalImport = 0 ;
         $getTotalExport = 0;
+        $getTotalProfit = 0;
+
         foreach ($orders as $order){
             $getTotalImport = $getTotalImport + $order->getTotal();
         }
         foreach ($order1s as $order1){
             $getTotalExport = $getTotalExport + $order1->getTotal();
+            $getTotalProfit = $getTotalProfit + $order1->details->sum('profit');
         }
 
         $version = '1.2';
         $currentPage = 'Báo cáo doanh thu';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Báo cáo', 'link' => route('home')]
             ];
-        return view('salesreport.index',compact('order1s','getTotalExport','getTotalImport','orders','version','currentPage','pages'));
+        return view('salesreport.index',compact('orders','order1s','expenses','getTotalImport','getTotalExport','getTotalProfit','version','currentPage','pages'));
     }
 
     /**
@@ -62,23 +66,27 @@ class SalesReportController extends Controller
         ]);
         $orders = ImportOrder::whereBetween('created_at',[$validatedData['date_min'],$validatedData['date_max']])->withCount('details')->paginate();
         $order1s = ExportOrder::whereBetween('created_at',[$validatedData['date_min'],$validatedData['date_max']])->withCount('details')->paginate();
+        $expenses = Expense::whereBetween('created_at',[$validatedData['date_min'],$validatedData['date_max']])->paginate();
+
         $getTotalImport = 0;
         $getTotalExport = 0;
+        $getTotalProfit = 0;
+
         foreach ($orders as $order){
             $getTotalImport = $getTotalImport + $order->getTotal();
         }
         foreach ($order1s as $order1){
             $getTotalExport = $getTotalExport + $order1->getTotal();
+            $getTotalProfit = $getTotalProfit + $order1->details->sum('profit');
         }
 
 
         $version = '1.2';
         $currentPage = 'Báo cáo doanh thu';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Báo cáo', 'link' => route('home')]
         ];
-        return view('salesreport.index',compact('getTotalImport','getTotalExport','orders','order1s','exports','version','currentPage','pages'));
-    }
+        return view('salesreport.index',compact('orders','order1s','expenses','getTotalImport','getTotalExport','getTotalProfit','version','currentPage','pages'));}
 
     /**
      * Display the specified resource.

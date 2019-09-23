@@ -18,6 +18,7 @@ class CreateExportOrderDetailsTable extends Migration
             $table->string('order_code', 25)->nullable();
 
             $table->string('commodity_code', 25)->nullable();
+            $table->string('profit', 25)->nullable();
             $table->string('unit', 128);
             $table->unsignedBigInteger('quantity')->default(0);
             $table->unsignedBigInteger('price')->default(0);

@@ -13,6 +13,11 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
                         <form method="GET" action="{{ route('commodities.create')}}">
                             <button type="submit" class="btn bg-purple margin">Thêm mới</button>
@@ -29,6 +34,7 @@
                                 <th>Giá nhập</th>
                                 <th>Giá xuất</th>
                                 <th>Sản phẩm / Thùng</th>
+                                <th>Tồn kho</th>
                                 <th>Ghi chú</th>
                                 <th>Chỉnh sửa/Xóa</th>
                             </tr>
@@ -46,6 +52,7 @@
                                     <td>{{$commodity->entry_price }}</td>
                                     <td>{{$commodity->price_out }}</td>
                                     <td>{{$commodity->product_carton }}</td>
+                                    <td>{{$commodity->warehouse }}</td>
                                     <td>{{$commodity->note }}  </td>
 
                                     <td>

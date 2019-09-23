@@ -130,6 +130,18 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-2 control-label">Số lượng hiện tại trong kho</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="warehouse" class="form-control" >
+                                    @error('code')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong style="color: red">{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="inputPassword3" class="col-sm-2 control-label">Ghi chú</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="note" class="form-control" >

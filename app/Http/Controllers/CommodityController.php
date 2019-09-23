@@ -20,7 +20,7 @@ class CommodityController extends Controller
         $version = '1.2';
         $currentPage = 'Hàng Hóa';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Data Tâm Phát', 'link' => route('home')]
         ];
         return view('commodities.index', compact('commodities', 'version', 'currentPage', 'pages'));
     }
@@ -32,16 +32,15 @@ class CommodityController extends Controller
      */
     public function create()
     {
+
+        $suppliers = Supplier::all();
         $version = '1.2';
-        $currentPage = 'THÊM HÀNG HÓA';
+        $currentPage = 'Thêm Hàng Hóa';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Data Tâm Phát', 'link' => route('home')]
         ];
 
-        // get all suppliers
-        $suppliers = Supplier::all();
-
-        return view('commodities.create', compact('commodities', 'suppliers', 'version', 'currentPage', 'pages'));
+        return view('commodities.create', compact( 'suppliers', 'version', 'currentPage', 'pages'));
     }
 
     /**
@@ -60,6 +59,7 @@ class CommodityController extends Controller
             'entry_price' => 'required',
             'price_out' => 'required',
             'product_carton' => 'required',
+            'warehouse' => 'required',
             'note' => 'nullable',
             'supplier_code' => 'required'
         ]);
@@ -71,7 +71,7 @@ class CommodityController extends Controller
             return redirect(route('commodities.index'))->with('status','Thêm Thành Công');
         }
         else {
-            return redirect(route('commodities.index'))->withErrors('supplier_code','Cái lòn này yêu cầu phải tồn tại');
+            return redirect(route('commodities.index'))->withErrors('supplier_code','Yêu cầu tồn tại code');
         }
     }
 
@@ -95,9 +95,9 @@ class CommodityController extends Controller
     public function edit(Commodity $commodity)
     {
         $version = '1.2';
-        $currentPage = 'Chình sửa hàng hóa';
+        $currentPage = 'Chỉnh sửa Hàng Hóa';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Data Tâm Phát', 'link' => route('home')]
         ];
         return view('commodities.edit', compact('commodity', 'version', 'currentPage', 'pages'));
     }

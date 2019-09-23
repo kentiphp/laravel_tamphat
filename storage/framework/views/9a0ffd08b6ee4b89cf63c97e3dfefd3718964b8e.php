@@ -37,6 +37,8 @@
 <script src="<?php echo e(asset('js/demo.js')); ?>"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 
+
+
 <script>
     <?php if(session('status')): ?>
     Swal.fire({

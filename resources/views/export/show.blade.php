@@ -22,7 +22,7 @@
                                 <th>Số Lượng</th>
                                 <th>Đơn Giá</th>
                                 <th>Thành Tiền</th>
-                                <th>Chỉnh sửa/Xóa</th>
+                                <th>Lợi nhuận</th>
                             </tr>
 
                             </thead>
@@ -35,7 +35,7 @@
                                     <td>{{ $detail->quantity }}</td>
                                     <td>{{ \App\Services\MyHelper::moneyFormating($detail->price) }}</td>
                                     <td>{{ \App\Services\MyHelper::moneyFormating($detail->getAmount()) }}</td>
-
+                                    <td>{{ \App\Services\MyHelper::moneyFormating($detail->profit) }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

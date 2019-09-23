@@ -22,7 +22,7 @@ class SupplierController extends Controller
         $version = '1.2';
         $currentPage = 'Nhà Cung Cấp';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Data Tâm Phát', 'link' => route('home')]
         ];
         return view('suppliers.index', compact('suppliers', 'version', 'currentPage', 'pages'));
     }
@@ -35,11 +35,11 @@ class SupplierController extends Controller
     public function create()
     {
         $version = '1.2';
-        $currentPage = 'Thêm Nhà Cung Cấp';
+        $currentPage = 'Thêm nhà Cung Cấp';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Data Tâm Phát', 'link' => route('home')]
         ];
-        return view('suppliers.create', compact('suppliers', 'version', 'currentPage', 'pages'));
+        return view('suppliers.create', compact( 'version', 'currentPage', 'pages'));
     }
 
     /**
@@ -81,9 +81,9 @@ class SupplierController extends Controller
     public function edit(Supplier $supplier)
     {
         $version = '1.2';
-        $currentPage = 'Chình sửa Nhà Cung Cấp';
+        $currentPage = 'Chỉnh sửa nhà Cung Cấp';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Data Tâm Phát', 'link' => route('home')]
         ];
         return view('suppliers.edit', compact('supplier', 'version', 'currentPage', 'pages'));
     }

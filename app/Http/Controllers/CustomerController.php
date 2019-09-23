@@ -19,7 +19,7 @@ class CustomerController extends Controller
         $version = '1.2';
         $currentPage = 'Khách hàng';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Data Tâm Phát', 'link' => route('home')]
         ];
         return view('customers.index', compact('customers', 'version', 'currentPage', 'pages'));
     }
@@ -32,11 +32,11 @@ class CustomerController extends Controller
     public function create()
     {
         $version = '1.2';
-        $currentPage = 'Khách hàng';
+        $currentPage = 'Thêm Khách hàng';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Data Tâm Phát', 'link' => route('home')]
         ];
-        return view('customers.create', compact('customers', 'version', 'currentPage', 'pages'));
+        return view('customers.create', compact( 'version', 'currentPage', 'pages'));
     }
 
     /**
@@ -69,7 +69,7 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        return view('customers.show', compact('customer'));
+        return view('customers.show');
     }
 
     /**
@@ -83,7 +83,7 @@ class CustomerController extends Controller
         $version = '1.2';
         $currentPage = 'Khách hàng';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Data Tâm Phát', 'link' => route('home')]
         ];
         return view('customers.edit', compact('customer', 'version', 'currentPage', 'pages'));
     }
@@ -119,7 +119,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        if ($custommer->trashed() == false) {
+        if ($customer->trashed() == false) {
             $customer->delete();
         }
 

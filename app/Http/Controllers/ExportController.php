@@ -26,9 +26,9 @@ class ExportController extends Controller
         }
         // dd($orders->first());
         $version = '1.2';
-        $currentPage = 'Xuất Hàng';
+        $currentPage = 'Bán hàng';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Sell', 'link' => route('home')]
         ];
         return view('export.index', compact('orders', 'version', 'currentPage', 'pages'));
     }
@@ -42,10 +42,9 @@ class ExportController extends Controller
     {
         $customers = Customer::withCount('orders')->get();
         $version = '1.2';
-        $currentPage = 'Đơn Nhập Hàng';
+        $currentPage = 'Xuất bill Bán hàng';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')],
-            ['name' => 'Xuất Hàng', 'link' => route('export.index')]
+            ['name' => 'Sell', 'link' => route('home')]
         ];
         return view('export.create', compact('customers', 'version', 'currentPage', 'pages'));
     }
@@ -62,6 +61,7 @@ class ExportController extends Controller
             'code' => 'required|unique:export_orders|max:25',
             'customer_code' => 'required|exists:customers,code|max:25',
             'commodity_code' => 'required|exists:commodities,code|max:25',
+            'profit' => 'required',
             'quantity' => 'required',
             'price' => 'required'
         ]);
@@ -82,6 +82,7 @@ class ExportController extends Controller
                         'unit' => $commodity->unit,
                         'quantity' => $validatedData['quantity'][$key],
                         'price' => $validatedData['price'][$key],
+                        'profit' => $validatedData['profit'][$key],
                     ]);
                     $exportOrder->details()->save($detail);
                 }
@@ -112,10 +113,10 @@ class ExportController extends Controller
         $export = ExportOrder::whereCode($code)->firstOrFail();
 
         $version = '1.2';
-        $currentPage = "Chi Tiết Đơn Xuất Hàng " . $code;
+        $currentPage = "Chi Tiết Đơn hàng " . $code;
         $pages = [
             ['name' => 'Trang chủ', 'link' => route('home')],
-            ['name' => 'Xuất Hàng', 'link' => route('export.index')]
+            ['name' => 'Bán hàng', 'link' => route('export.index')]
         ];
 
         return view('export.show', compact('export', 'version', 'currentPage', 'pages'));

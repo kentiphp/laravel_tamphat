@@ -11,6 +11,12 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
+                        <?php if(session('status')): ?>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo e(session('status')); ?>
+
+                            </div>
+                        <?php endif; ?>
 
                         <form method="GET" action="<?php echo e(route('customers.create')); ?>">
                             <button type="submit" class="btn bg-purple margin">Thêm mới</button>

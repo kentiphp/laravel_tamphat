@@ -11,6 +11,12 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
+                        <?php if(session('status')): ?>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo e(session('status')); ?>
+
+                            </div>
+                        <?php endif; ?>
 
                         <form method="GET" action="<?php echo e(route('commodities.create')); ?>">
                             <button type="submit" class="btn bg-purple margin">Thêm mới</button>
@@ -27,6 +33,7 @@
                                 <th>Giá nhập</th>
                                 <th>Giá xuất</th>
                                 <th>Sản phẩm / Thùng</th>
+                                <th>Tồn kho</th>
                                 <th>Ghi chú</th>
                                 <th>Chỉnh sửa/Xóa</th>
                             </tr>
@@ -44,6 +51,7 @@
                                     <td><?php echo e($commodity->entry_price); ?></td>
                                     <td><?php echo e($commodity->price_out); ?></td>
                                     <td><?php echo e($commodity->product_carton); ?></td>
+                                    <td><?php echo e($commodity->warehouse); ?></td>
                                     <td><?php echo e($commodity->note); ?>  </td>
 
                                     <td>

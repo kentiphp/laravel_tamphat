@@ -21,7 +21,7 @@
                                 <th>Số Lượng</th>
                                 <th>Đơn Giá</th>
                                 <th>Thành Tiền</th>
-                                <th>Chỉnh sửa/Xóa</th>
+                                <th>Lợi nhuận</th>
                             </tr>
 
                             </thead>
@@ -34,7 +34,7 @@
                                     <td><?php echo e($detail->quantity); ?></td>
                                     <td><?php echo e(\App\Services\MyHelper::moneyFormating($detail->price)); ?></td>
                                     <td><?php echo e(\App\Services\MyHelper::moneyFormating($detail->getAmount())); ?></td>
-
+                                    <td><?php echo e(\App\Services\MyHelper::moneyFormating($detail->profit)); ?></td>
                                 </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>

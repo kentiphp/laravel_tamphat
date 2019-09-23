@@ -12,7 +12,7 @@ class ExportOrderDetail extends Model
      * @var array
      */
     protected $fillable = [
-        'order_code', 'commodity_code', 'unit', 'quantity', 'price',
+        'order_code', 'commodity_code', 'unit', 'quantity', 'price','profit'
     ];
 
     /**

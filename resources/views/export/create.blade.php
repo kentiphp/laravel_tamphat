@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Nhà Phân Phối</label>
+                            <label class="col-sm-2 control-label">Tên Quán</label>
                             <div class="col-sm-10">
                                 <select onchange="getCustomer(this.value)" class="select2" id="customer_code"
                                         name="customer_code" style="width: 100%;">
@@ -62,6 +62,7 @@
                                         <th>Số Lượng</th>
                                         <th>Đơn Giá</th>
                                         <th>Thành Tiền</th>
+                                        <th>Lợi nhuận</th>
                                     </tr>
                                     </thead>
                                     <tbody id="whereToAppend">
@@ -146,6 +147,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-sm-3 control-label">Giá nhập</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" oninput="myfuntion()" id="entry_price" readonly hidden>
+                            </div>
+                        </div>
+
 
                         <div class="form-group row">
                             <label class="col-sm-3 control-label">Giá đề xuất bán <span class="text-danger">(VNĐ)</span></label>
@@ -178,14 +186,22 @@
                         <div class="form-group row">
                             <label class="col-sm-3 control-label">Số Lượng</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="quantity" type="number" required/>
+                                <input class="form-control" oninput="myfuntion()" id="quantity" type="number" required/>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-3 control-label">Giá Bán/Đơn Vị</label>
                             <div class="col-sm-9">
-                                <input class="form-control" id="price" type="number" required/>
+                                <input class="form-control" oninput="myfuntion()" id="price" type="number" required/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 control-label">lợi nhuận</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" id="profit" hidden readonly>
                             </div>
                         </div>
 
@@ -210,6 +226,16 @@
 @section('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
     <script>
+
+        function myfuntion() {
+            var entry_price = document.getElementById('entry_price').value;
+            var quantity = document.getElementById('quantity').value;
+            var price = document.getElementById('price').value;
+
+            document.getElementById('profit').value = (price * quantity) - (entry_price * quantity);
+
+        }
+
         let total = 0;
         $("#addProductForm").submit(function (event) {
             // console.log(buildHTML());
@@ -224,6 +250,7 @@
 
         function buildHTML() {
             let commodityCode = $("#commodity_code").val();
+            let profit = $("#profit").val();
             let name = $("#name").val();
             let quantity = $("#quantity").val();
             let price = $("#price").val();
@@ -235,6 +262,7 @@
                 '<td><input class="form-control" readonly type="text" name="quantity[' + count + ']" value="' + quantity + '" /></td>' +
                 '<td><input class="form-control" readonly type="text" name="price[' + count + ']" value="' + price + '" /></td>' +
                 '<td><input class="form-control" readonly type="text" value="' + formatMoney(quantity * price) + " VNĐ" + '" /></td>' +
+                '<td><input class="form-control" readonly type="text" name="profit[' + count + ']" value="' + profit + '" /></td>' +
                 '</tr>';
             count++;
             return html;
@@ -285,6 +313,7 @@
                     $("#name").attr('value', response.name);
                     $("#specifications").attr('value', response.specifications);
                     $("#commodity_unit").attr('value', response.unit);
+                    $("#entry_price").attr('value', response.entry_price);
                     $("#price_out").attr('value', formatMoney(response.price_out));
                     $("#product_carton").attr('value', formatMoney(response.product_carton));
                     $("#warehouse").attr('value', formatMoney(response.warehouse));

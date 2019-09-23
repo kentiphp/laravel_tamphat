@@ -68,11 +68,12 @@
 
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Danh Sách Xuất hàng</h3>
+                <h3 class="box-title">Danh Sách bán hàng</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <p style="color: green">Tổng : {{ \App\Services\MyHelper::moneyFormating($getTotalExport) }}</p>
+                <p style="color: green">Tổng Doanh Thu : {{ \App\Services\MyHelper::moneyFormating($getTotalExport) }}</p>
+                <p style="color: green">Tổng Lợi nhuận : {{ \App\Services\MyHelper::moneyFormating($getTotalProfit)  }}</p>
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -80,6 +81,7 @@
                         <th>Khách Hàng</th>
                         <th>Số Sản Phẩm</th>
                         <th>Thành Tiền</th>
+                        <th>Lợi nhuận</th>
                         <th>Ngày Nhập</th>
                         <th>Chỉnh sửa/Xóa</th>
                     </tr>
@@ -91,10 +93,13 @@
                             <td>{{ $order1->customer->name }}</td>
                             <td>{{ $order1->details_count }} sản phẩm</td>
                             <td>{{ \App\Services\MyHelper::moneyFormating($order1->getTotal()) }}</td>
+                            <td>{{ \App\Services\MyHelper::moneyFormating($order1->details->sum('profit'))}}</td>
                             <td>{{ $order1->created_at->diffForHumans() }}</td>
 
                             <td>
-                                <a href="{{ route('export.show', $order1->code) }}"><button class="btn btn-block btn-info btn-xs">Chi Tiết</button></a>
+                                <a href="{{ route('export.show', $order1->code) }}">
+                                    <button class="btn btn-block btn-info btn-xs">Chi Tiết</button>
+                                </a>
                                 {{--<a href="{{ route('export.edit', $order) }}"><button class="btn btn-block btn-success btn-xs">Chỉnh Sửa</button></a>--}}
                                 <form action="{{ route('export.destroy', $order1->code) }}" method="POST">
                                     @csrf
@@ -111,6 +116,61 @@
 
                 </table>
                 {{$order1s->links()}}
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Danh Sách Chi Tiêu</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <p style="color: green">Tổng : {{ \App\Services\MyHelper::moneyFormating($expenses->sum('total')) }}</p>
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Nội dung chi</th>
+                        <th>Số tiền</th>
+                        <th>Số lượng</th>
+                        <th>Tổng</th>
+                        <th>Ngày chi</th>
+                        <th>Ghi chú</th>
+                        <th>Tùy chọn</th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    @foreach ($expenses as $expense)
+                        <tr>
+                            <td>{{$expense->content }}</td>
+                            <td>{{$expense->price }}  </td>
+                            <td>{{$expense->quantity }}</td>
+                            <td>{{$expense->total }}</td>
+                            <td>{{$expense->created_at }}</td>
+                            <td>{{$expense->note }}</td>
+
+                            <td>
+
+                                <form action="{{ route('expense.edit', $expense) }}">
+                                    <button type="submit" class="btn btn-block btn-success btn-xs">Edit</button>
+                                </form>
+
+                                <form action="{{ route('expense.destroy', $expense) }}" method="POST">
+                                    @csrf
+                                    {!! method_field('DELETE') !!}
+                                    <button type="submit" value="delete" class="btn btn-block btn-danger btn-xs">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+
+                    </tbody>
+
+                </table>
+                {{$expenses->links()}}
             </div>
             <!-- /.box-body -->
         </div>

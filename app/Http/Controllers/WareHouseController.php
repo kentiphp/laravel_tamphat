@@ -17,7 +17,7 @@ class WarehouseController extends Controller
         $version = '1.2';
         $currentPage = 'Tồn kho';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Kho', 'link' => route('home')]
         ];
         return view('warehouse.index', compact('warehouses','sumPriceWarehouse', 'version', 'currentPage', 'pages'));
     }

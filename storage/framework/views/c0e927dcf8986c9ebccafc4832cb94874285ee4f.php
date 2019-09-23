@@ -67,11 +67,12 @@
 
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Danh Sách Xuất hàng</h3>
+                <h3 class="box-title">Danh Sách bán hàng</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <p style="color: green">Tổng : <?php echo e(\App\Services\MyHelper::moneyFormating($getTotalExport)); ?></p>
+                <p style="color: green">Tổng Doanh Thu : <?php echo e(\App\Services\MyHelper::moneyFormating($getTotalExport)); ?></p>
+                <p style="color: green">Tổng Lợi nhuận : <?php echo e(\App\Services\MyHelper::moneyFormating($getTotalProfit)); ?></p>
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -79,6 +80,7 @@
                         <th>Khách Hàng</th>
                         <th>Số Sản Phẩm</th>
                         <th>Thành Tiền</th>
+                        <th>Lợi nhuận</th>
                         <th>Ngày Nhập</th>
                         <th>Chỉnh sửa/Xóa</th>
                     </tr>
@@ -90,10 +92,13 @@
                             <td><?php echo e($order1->customer->name); ?></td>
                             <td><?php echo e($order1->details_count); ?> sản phẩm</td>
                             <td><?php echo e(\App\Services\MyHelper::moneyFormating($order1->getTotal())); ?></td>
+                            <td><?php echo e(\App\Services\MyHelper::moneyFormating($order1->details->sum('profit'))); ?></td>
                             <td><?php echo e($order1->created_at->diffForHumans()); ?></td>
 
                             <td>
-                                <a href="<?php echo e(route('export.show', $order1->code)); ?>"><button class="btn btn-block btn-info btn-xs">Chi Tiết</button></a>
+                                <a href="<?php echo e(route('export.show', $order1->code)); ?>">
+                                    <button class="btn btn-block btn-info btn-xs">Chi Tiết</button>
+                                </a>
                                 
                                 <form action="<?php echo e(route('export.destroy', $order1->code)); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
@@ -111,6 +116,63 @@
 
                 </table>
                 <?php echo e($order1s->links()); ?>
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Danh Sách Chi Tiêu</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <p style="color: green">Tổng : <?php echo e(\App\Services\MyHelper::moneyFormating($expenses->sum('total'))); ?></p>
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Nội dung chi</th>
+                        <th>Số tiền</th>
+                        <th>Số lượng</th>
+                        <th>Tổng</th>
+                        <th>Ngày chi</th>
+                        <th>Ghi chú</th>
+                        <th>Tùy chọn</th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    <?php $__currentLoopData = $expenses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $expense): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <tr>
+                            <td><?php echo e($expense->content); ?></td>
+                            <td><?php echo e($expense->price); ?>  </td>
+                            <td><?php echo e($expense->quantity); ?></td>
+                            <td><?php echo e($expense->total); ?></td>
+                            <td><?php echo e($expense->created_at); ?></td>
+                            <td><?php echo e($expense->note); ?></td>
+
+                            <td>
+
+                                <form action="<?php echo e(route('expense.edit', $expense)); ?>">
+                                    <button type="submit" class="btn btn-block btn-success btn-xs">Edit</button>
+                                </form>
+
+                                <form action="<?php echo e(route('expense.destroy', $expense)); ?>" method="POST">
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo method_field('DELETE'); ?>
+
+                                    <button type="submit" value="delete" class="btn btn-block btn-danger btn-xs">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                    </tbody>
+
+                </table>
+                <?php echo e($expenses->links()); ?>
 
             </div>
             <!-- /.box-body -->

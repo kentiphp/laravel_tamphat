@@ -136,6 +136,15 @@
                 </a>
             </li>
 
+            <li class="active">
+                <a href="<?php echo e(route('expense.create')); ?>">
+                    <i class="fa fa-th"></i> <span>Chi Tiêu</span>
+                    <span class="pull-right-container">
+              <small class="label pull-right bg-red">2019</small>
+            </span>
+                </a>
+            </li>
+
             <li class="active treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i>

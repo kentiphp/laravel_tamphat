@@ -24,7 +24,7 @@ class ImportController extends Controller
         $version = '1.2';
         $currentPage = 'Nhập Hàng';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Kho', 'link' => route('home')]
         ];
         return view('import.index', compact('orders', 'version', 'currentPage', 'pages'));
     }
@@ -42,8 +42,7 @@ class ImportController extends Controller
         $version = '1.2';
         $currentPage = 'Đơn Nhập Hàng';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')],
-            ['name' => 'Nhập Hàng', 'link' => route('import.index')]
+            ['name' => 'Kho', 'link' => route('home')]
         ];
         return view('import.create', compact('suppliers', 'version', 'currentPage', 'pages'));
     }
@@ -106,7 +105,7 @@ class ImportController extends Controller
         $version = '1.2';
         $currentPage = "Chi Tiết Đơn Nhập Hàng Đơn Hàng " . $code;
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')],
+            ['name' => 'Kho', 'link' => route('home')],
             ['name' => 'Nhập Hàng', 'link' => route('import.index')]
         ];
 

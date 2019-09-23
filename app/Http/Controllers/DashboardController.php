@@ -26,11 +26,11 @@ class DashboardController extends Controller
 
 
         $version = '1.2';
-        $currentPage = 'Xuất Hàng';
+        $currentPage = 'Theo dõi khách hàng';
         $pages = [
-            ['name' => 'Trang chủ', 'link' => route('home')]
+            ['name' => 'Dashboard', 'link' => route('home')]
         ];
-        return view('dashboards.index', compact('exports','orders', 'version', 'currentPage', 'pages'));
+        return view('dashboards.index', compact('exports', 'version', 'currentPage', 'pages'));
     }
 
     /**

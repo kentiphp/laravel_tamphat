@@ -26,3 +26,4 @@ Route::resources([ 'export' => 'ExportController' ]);
 Route::resources([ 'warehouse' => 'WarehouseController' ]);
 Route::resources([ 'salesreport' => 'SalesReportController' ]);
 Route::resources([ 'dashboard' => 'DashboardController' ]);
+Route::resources([ 'expense' => 'ExpenseController' ]);
