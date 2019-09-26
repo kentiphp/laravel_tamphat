@@ -69,7 +69,7 @@
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <i style="color: green"> Vui lòng điền đầy đủ các mục trên ngoại trừ mục note </i>
-                            <button value="{{ __('supplier.submit') }} type="submit" class="btn btn-info pull-right">Thêm mới</button>
+                            <button value="{{ __('supplier.submit') }}" type="submit" class="btn btn-info pull-right">Thêm mới</button>
                         </div>
                         <!-- /.box-footer -->
                     </form>

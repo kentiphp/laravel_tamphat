@@ -13,10 +13,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return redirect(route('dashboard.index'));
-});
+Route::get('/','DashboardController@index');
 Route::get('home', 'HomeController@index')->name('home');
+
+
 
 Route::resources([ 'suppliers' => 'SupplierController' ]);
 Route::resources([ 'commodities' => 'CommodityController' ]);
